@@ -1,0 +1,710 @@
+{
+    "project": {
+        "name": "The cityselector API",
+        "description": "城市选择器，支持国内和国际城市",
+        "version": "1.1",
+        "url": "http://gallery.kissyui.com/cityselector/1.1/guide/index.html"
+    },
+    "files": {
+        "1.1\\build\\domestic.js": {
+            "name": "1.1\\build\\domestic.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "1.1\\build\\foreign.js": {
+            "name": "1.1\\build\\foreign.js",
+            "modules": {
+                "foreign": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "1.1\\build\\index.js": {
+            "name": "1.1\\build\\index.js",
+            "modules": {
+                "domestic": 1,
+                "cityselector": 1
+            },
+            "classes": {
+                "CitySelector": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "domestic": {
+            "name": "domestic",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "1.1\\build\\index.js",
+            "line": 8,
+            "description": "国内城市数据",
+            "fileoverview": "国内城市数据",
+            "author": "freyaoo@gmail.com",
+            "version": "1.1"
+        },
+        "foreign": {
+            "name": "foreign",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "1.1\\build\\foreign.js",
+            "line": 7,
+            "description": "国际城市数据",
+            "fileoverview": "国际城市数据",
+            "author": "freyaoo@gmail.com",
+            "version": "1.1"
+        },
+        "cityselector": {
+            "name": "cityselector",
+            "submodules": {},
+            "classes": {
+                "CitySelector": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "1.1\\build\\index.js",
+            "line": 64,
+            "description": "城市选择器，支持国内和国际城市，也可以自定义城市数据",
+            "author": "freyaoo@gmail.com",
+            "version": "1.1"
+        }
+    },
+    "classes": {
+        "CitySelector": {
+            "name": "CitySelector",
+            "shortname": "CitySelector",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "cityselector",
+            "namespace": "",
+            "file": "1.1\\build\\index.js",
+            "line": 64,
+            "description": "城市选择器constructor\n\n       <input id=\"#foo\" type=\"text\">    \n       KISSY.use('gallery/cityselector/1.1/index',function(S,CitySelector){\n       var cityselector = new CitySelector({\n           node : '#foo'\n       });",
+            "extends": "RichBase",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 124,
+            "description": "绑定需要的事件",
+            "itemtype": "method",
+            "name": "_bind",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 148,
+            "description": "绑定城市联动事件",
+            "itemtype": "method",
+            "name": "_bindLinkage",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 167,
+            "description": "预处理城市数据，主要是为了后面的dom操作方便",
+            "itemtype": "method",
+            "name": "_prepareData",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "letters 字母数组",
+                "type": "Array"
+            },
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 205,
+            "description": "预处理联动数据",
+            "itemtype": "method",
+            "name": "_prepareLinkageData",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 223,
+            "description": "渲染联动数据",
+            "itemtype": "method",
+            "name": "_renderLinkage",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 255,
+            "description": "渲染城市选择器",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "this,当前实例",
+                "type": "CitySelector"
+            },
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 315,
+            "description": "选择字母筛选触发的处理方法",
+            "itemtype": "method",
+            "name": "_letterFilter",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "Event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 330,
+            "description": "根据指定的字母处理dom",
+            "itemtype": "method",
+            "name": "_setLetter",
+            "params": [
+                {
+                    "name": "letter",
+                    "description": "指定的字母,26个字母加单词'all'",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 347,
+            "description": "当用户切换首字母时触发",
+            "itemtype": "event",
+            "name": "letterchange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "提供用户当前选择的首字母\n<dl>\n<dt>letter</dt><dd>用户选中的字母，如'x','a','all'</dd>\n</dl>",
+                    "type": "Event"
+                }
+            ],
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 366,
+            "description": "收起或展开省下面的城市",
+            "itemtype": "method",
+            "name": "_toggleOrExpand",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "Event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 378,
+            "description": "根据输入框里已存在的城市选中城市选择器中的城市",
+            "itemtype": "method",
+            "name": "_checkCity",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 391,
+            "description": "选中城市时的事件执行",
+            "itemtype": "method",
+            "name": "_selectCity",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "Event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 406,
+            "description": "选中省(国际对应国家)时的事件执行",
+            "itemtype": "method",
+            "name": "_selectProvince",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "Event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 421,
+            "description": "根据传入的节点和类型填充input",
+            "itemtype": "method",
+            "name": "_fillInput",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "",
+                    "type": "Node",
+                    "optional": true,
+                    "optdefault": "checkbox"
+                },
+                {
+                    "name": "类型{city|province}",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 447,
+            "description": "根据传入的节点取消城市选择",
+            "itemtype": "method",
+            "name": "_delCity",
+            "params": [
+                {
+                    "name": "tar",
+                    "description": "input节点",
+                    "type": "Node"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 458,
+            "description": "设置'autoWidth'属性时执行",
+            "itemtype": "method",
+            "name": "_onSetAutoWidth",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 471,
+            "description": "设置'width'属性时执行",
+            "itemtype": "method",
+            "name": "_onSetWidth",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 483,
+            "description": "设置'height'属性时执行",
+            "itemtype": "method",
+            "name": "_onSetAutoHeight",
+            "access": "private",
+            "tagname": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 497,
+            "description": "根据指定的字母切换到相应字母filter",
+            "itemtype": "method",
+            "name": "setLetter",
+            "params": [
+                {
+                    "name": "letter",
+                    "description": "指定的字母,'abcdefghijklmnopqrstuvwxyz'加单词'all'",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "this，当前实例",
+                "type": "CitySelector"
+            },
+            "example": [
+                " \n\n       cityselector.setLetter('x'); //选中所有以'X'为拼音首字母的省\n       cityselector.setLetter('all'); //选中全部"
+            ],
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 520,
+            "description": "显示城市选择器",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "this，当前实例",
+                "type": "CitySelector"
+            },
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 531,
+            "description": "隐藏城市选择器",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "this，当前实例",
+                "type": "CitySelector"
+            },
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 542,
+            "description": "选中指定城市",
+            "itemtype": "method",
+            "name": "select",
+            "params": [
+                {
+                    "name": "string",
+                    "description": "城市名称，如'北京'或['北京','太原']",
+                    "type": "Array|String"
+                }
+            ],
+            "return": {
+                "description": "this，当前实例",
+                "type": "CitySelector"
+            },
+            "example": [
+                "\n\n       var cityselector = new CitySelector(config);\n       cityselector.select('北京'); //会选中北京\n       cityselector.select(['北京','杭州']); //会选中北京和杭州"
+            ],
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 579,
+            "description": "当用户选择时触发",
+            "itemtype": "event",
+            "name": "select",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "提供用户选择的一些信息\n<dl>\n<dt>type</dt><dd>用户选中的类型，'city'或'province'</dd>\n<dt>value</dt><dd>用户选中的值，'北京'</dd>\n<dt>raw</dt><dd>用户选中的值对应的元数据</dd>\n</dl>",
+                    "type": "Event"
+                }
+            ],
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 610,
+            "description": "取消选中指定城市，与select相反",
+            "itemtype": "method",
+            "name": "unSelect",
+            "params": [
+                {
+                    "name": "string",
+                    "description": "城市名称，如'北京'或['北京','太原']",
+                    "type": "Array|String"
+                }
+            ],
+            "return": {
+                "description": "this，当前实例",
+                "type": "CitySelector"
+            },
+            "chainable": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 641,
+            "description": "当用户取消选择时触发",
+            "itemtype": "event",
+            "name": "unselect",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "提供用户取消的一些信息\n<dl>\n<dt>type</dt><dd>用户取消的类型，'city'或'province'</dd>\n<dt>value</dt><dd>用户取消的值，'北京'</dd>\n<dt>raw</dt><dd>用户取消的值对应的元数据</dd>\n</dl>",
+                    "type": "Event"
+                }
+            ],
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 681,
+            "description": "获取用户当前已经选中的城市列表",
+            "itemtype": "method",
+            "name": "getSelected",
+            "return": {
+                "description": "选中的城市列表，['北京','太原']",
+                "type": "Array"
+            },
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 692,
+            "description": "设置城市选择器的触发方式，在不设置render的情况下有效，会以overlay的方式呈现",
+            "itemtype": "attribute",
+            "name": "triggerType",
+            "type": "string",
+            "default": "'focus'",
+            "writeonce": "",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 704,
+            "description": "设置城市选择器的宽度",
+            "itemtype": "attribute",
+            "name": "width",
+            "type": "number",
+            "default": "500",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 715,
+            "description": "设置城市选择器的高度",
+            "itemtype": "attribute",
+            "name": "height",
+            "type": "number",
+            "default": "400",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 726,
+            "description": "城市选择器默认宽度与input一致",
+            "itemtype": "attribute",
+            "name": "autoWidth",
+            "type": "boolean",
+            "default": "false",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 737,
+            "description": "是否支持多选",
+            "itemtype": "attribute",
+            "name": "multiple",
+            "type": "boolean",
+            "default": "false",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 748,
+            "description": "省是否可以选择",
+            "itemtype": "attribute",
+            "name": "canProvinceSelect",
+            "type": "boolean",
+            "default": "false",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 759,
+            "description": "设置城市选择器的class前缀，只设置了一个，如果需要自定义样式，可使用此命名空间重置",
+            "itemtype": "attribute",
+            "name": "prefixCls",
+            "type": "string",
+            "default": "'ks-'",
+            "optional": 1,
+            "writeonce": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 771,
+            "description": "城市选择器需要的数据",
+            "itemtype": "attribute",
+            "name": "data",
+            "type": "json",
+            "writeonce": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 781,
+            "description": "是否启用select联动功能，启用后需要提供两个select节点",
+            "itemtype": "attribute",
+            "name": "linkage",
+            "type": "boolean",
+            "writeonce": "",
+            "default": "false",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 793,
+            "description": "启用select联动功能后的省份select节点(国外对应国家)",
+            "itemtype": "attribute",
+            "name": "countrySelect",
+            "type": "HTMLElement|node|selector",
+            "writeonce": "",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 803,
+            "description": "启用select联动功能后的城市select节点(国外对应州、城市)",
+            "itemtype": "attribute",
+            "name": "citySelect",
+            "type": "HTMLElement|node|selector",
+            "writeonce": "",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 813,
+            "description": "启用select联动功能后的默认国家或者省",
+            "itemtype": "attribute",
+            "name": "defaultLinkageCountry",
+            "type": "string",
+            "writeonce": "",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 823,
+            "description": "城市选择器所需要绑定的input节点",
+            "itemtype": "attribute",
+            "name": "node",
+            "type": "HTMLElement|node|selector",
+            "writeonce": "",
+            "class": "CitySelector",
+            "module": "cityselector"
+        },
+        {
+            "file": "1.1\\build\\index.js",
+            "line": 830,
+            "description": "城市选择器渲染的父容器，如果不提供则使用overlay方式",
+            "itemtype": "attribute",
+            "name": "render",
+            "type": "HTMLElement|node|selector",
+            "writeonce": "",
+            "optional": 1,
+            "class": "CitySelector",
+            "module": "cityselector"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: fileoverview",
+            "line": " 1.1\\build\\domestic.js:7"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " 1.1\\build\\domestic.js:7"
+        },
+        {
+            "message": "unknown tag: fileoverview",
+            "line": " 1.1\\build\\foreign.js:7"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " 1.1\\build\\foreign.js:7"
+        },
+        {
+            "message": "unknown tag: fileoverview",
+            "line": " 1.1\\build\\index.js:8"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " 1.1\\build\\index.js:8"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " 1.1\\build\\index.js:23"
+        }
+    ]
+}
