@@ -45,7 +45,12 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
         <input id="#foo" type="text">    
         KISSY.use('gallery/cityselector/1.2/index',function(S,CitySelector){
         var cityselector = new CitySelector({
-            node : '#foo'
+            provinceSelect : '#foo3',
+            citySelect : '#foo4',
+            districtSelect : '#foo10',
+            // province : '黑龙江省',
+            // city : '大庆市',
+            // district : '红岗区'
         });
 
     *
@@ -59,34 +64,20 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
     		var _ = this;
             _._node = S.one(_.get('node'));
             _._renderNode = S.one(_.get('render'));
-            if(!_.get('linkage')){
-            	if(!_._node && !_._renderNode){
-	                S.log('cityselector::node and render are not find,cityselector init failured!');
-	                return;
-	            }
-	            if(!_.get('data')){
-	            	S.log('cityselector::cityselector\'s data is undefined,cityselector init failured!');
-	            	return;
-	            }
-            }            
+        	if(!_._node && !_._renderNode){
+                S.log('cityselector::node and render are not find,cityselector init failured!');
+                return;
+            }
+            if(!_.get('data')){
+            	S.log('cityselector::cityselector\'s data is undefined,cityselector init failured!');
+            	return;
+            }         
             _._id = S.guid();
             _._selected = []; 
             _._selectedValues = [];
-            if(_.get('linkage')){
-            	if(!_.get('countrySelect') || !_.get('citySelect')){
-            		S.log('cityselector::countrySelect and citySelect is needed!');
-            		return;
-            	}
-            	_.countryNode = S.one(_.get('countrySelect'));
-            	_.cityNode = S.one(_.get('citySelect'));
-            	_._prepareLinkageData();
-            	_._renderLinkage();
-            	_._bindLinkage();
-            }else{
-            	_.render();
-	            _._node && _._checkCity();
-	            _._bind();
-            }           
+        	_.render();
+            _._node && _._checkCity();
+            _._bind();      
     	},
         destructor : function(){
         	var _ = this;
@@ -118,29 +109,25 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
                 _._contentEl.on('click',function(e){
                     e.stopPropagation();
                 });
-                _._node.on('click',function(e){
-                    e.stopPropagation();
-                });
+                _._bindInput();
             }
         },
         /**
-		绑定城市联动事件
-
-		@method _bindLinkage
-		@private
-        */
-        _bindLinkage : function(){
-        	var _ = this;
-        	_.countryNode.on('change',function(e){
-        		var city = _.countryNode.val(),
-        			citys = _.linkageData[city].city;
-        		_.cityNode[0].options.length = 0;
-        		S.each(citys,function(item,index){
-        			var op = new Option(item.name,item.name);
-        			op.setAttribute('data-code',item.code);
-        			_.cityNode[0].options.add(op);
-        		});
-        	},_);
+         * 绑定input节点相关事件
+         * 
+         * @method _bindInput
+         * @private
+         */
+        _bindInput : function(){
+            var _ = this;
+            _.nodePropagationHandler = function(e){
+                e.stopPropagation();
+            };
+            _.nodeFocusHandler = function(e){
+                _._overlay.show();
+            };
+            _._node.on('click',_.nodePropagationHandler);
+            _._node.on('focus',_.nodeFocusHandler);
         },
         /**
         * 预处理城市数据，主要是为了后面的dom操作方便
@@ -181,58 +168,6 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
             return letters;
         },
         /**
-		预处理联动数据
-
-		@method _prepareLinkageData
-		@private
-        */
-        _prepareLinkageData : function(){
-        	var _ = this,
-        		data = _.get('data');
-        	_.linkageData = {};
-        	S.each(data,function(item){
-        		_.linkageData[item.name] = {
-        			name : item.name,
-        			code : item.code,
-        			city : item.city ? item.city : [item]
-        		}
-        	});
-        },
-        /**
-		渲染联动数据
-
-		@method _renderLinkage
-		@private
-        */
-        _renderLinkage : function(){
-        	var _ = this,
-        		defaultCountry,
-        		defaultCountryData,
-        		citys;
-        	if(_.get('defaultLinkageCountry')){
-        		defaultCountry = _.get('defaultLinkageCountry');
-        	}else{
-        		defaultCountry = _.get('data')[0].name;
-        	}
-        	defaultCountryData = _.linkageData[defaultCountry];
-        	_.countryNode[0].options.length = 0;
-        	S.each(_.linkageData,function(val,key){
-        		var op = new Option(val.name,val.name);
-        		op.setAttribute('data-code',val.code);
-        		_.countryNode[0].options.add(op);
-        	});
-        	if(_.get('defaultLinkageCountry')){
-        		_.countryNode[0].value = defaultCountry;
-        	}
-        	if(defaultCountryData){        		
-        		S.each(defaultCountryData.city,function(item,index){
-        			var op = new Option(item.name,item.name);
-        			op.setAttribute('data-code',item.code);
-        			_.cityNode[0].options.add(op);
-        		});
-        	}
-        },
-        /**
         * 渲染城市选择器
         *
         * @method render
@@ -267,29 +202,42 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
                 listheight : this.get(HEIGHT) - 50
             };
             
-            this._contentEl = S.one(TMPL.render(obj));
-            this._navEl = this._contentEl.one('#ks-cityselector'+this._id+'-nav');
-            this._listEl = this._contentEl.one('#ks-cityselector'+this._id+'-citylist');
             if(this._renderNode){
-                this._renderNode.append(this._contentEl);
+                this._renderNode.append(TMPL.render(obj));
             }else{
-                this._overlay = new Overlay.Popup({
+                // this._overlay = new Overlay.Popup({
+                //     prefixCls : 'ks-cityselector-',
+                //     width : w,
+                //     trigger : this._node,
+                //     visible : false,
+                //     align : {
+                //         node : this._node,
+                //         points : ['bl','tl'],
+                //         offset :[-1,0]
+                //     },
+                //     content : this._contentEl
+                // });
+                
+                this._overlay = new Overlay({
                     prefixCls : 'ks-cityselector-',
                     width : w,
-                    trigger : this._node,
                     visible : false,
-                    align : {
-                        node : this._node,
-                        points : ['bl','tl'],
-                        offset :[-1,0]
-                    },
-                    content : this._contentEl
-                });
+                    //srcNode : srcNode
+                    content : TMPL.render(obj)
+                }).render();
               
                 this._overlay.on('show',function(){
+                    _._overlay.set('align',{
+                        node : _._node,
+                        points : ['bl','tl'],
+                        offset : [-1,0]
+                    });
                     _._checkCity();
                 });
             }
+            this._contentEl = S.one('#ks-cityselector'+this._id);
+            this._navEl = this._contentEl.one('#ks-cityselector'+this._id+'-nav');
+            this._listEl = this._contentEl.one('#ks-cityselector'+this._id+'-citylist');
             return this;
         },
         /**
@@ -363,8 +311,11 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
         */
         _checkCity : function(){
             var _ = this,
-                val = this._node.val().split(',');
-            S.each(val,function(item){
+                val = S.trim(this._node.val());
+            if(!val){
+                return;
+            }
+            S.each(val.split(','),function(item){
                 item && _.select(item);
             });
         },
@@ -449,15 +400,30 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
             }            
         },
         /**
+         * 设置'node'时执行
+         *
+         * @method _onSetNode
+         * @private
+         */
+        _onSetNode : function(){
+            var _ = this,
+                node = S.one(_.get('node'));
+            if(node){
+                _._node.detach('click',_.nodePropagationHandler);
+                _._node.detach('focus',_.nodeFocusHandler);
+                _._node = node;
+                _._selected = [];
+                _._selectedValues = [];
+                _._bindInput();
+            }
+        },
+        /**
         * 设置'width'属性时执行
         *
         * @method _onSetWidth
         * @private
         */
         _onSetWidth : function(){
-        	if(this.get('linkage')){
-        		return;
-        	}
             this._contentEl.css(WIDTH,this.get(WIDTH));
         },
         /**
@@ -467,9 +433,6 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
         * @private
         */
         _onSetHeight : function(){
-        	if(this.get('linkage')){
-        		return;
-        	}
             var h = this.get(HEIGHT);
             this._contentEl.css(HEIGHT,h);
             this._listEl.css(HEIGHT,h - 50);
@@ -524,6 +487,7 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
         *
         * @method select
         * @param {Array|String} string 城市名称，如'北京'或['北京','太原']
+        * @param {boolean} verbose 是否静默，如果为true，则不触发select事件
         * @return {CitySelector} this，当前实例
         * @example
 
@@ -533,7 +497,7 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
 
         * @chainable
         */
-        select : function(string){
+        select : function(string,verbose){
             var _ = this;
             if(S.isArray(string)){
                 S.each(string,function(item){
@@ -566,13 +530,15 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
                     <dt>raw</dt><dd>用户选中的值对应的元数据</dd>
                     </dl>
                     */
-                    this.fire('select',{
-                        data : {
-                            type : type,
-                            value : string,
-                            raw : this._formatData[id]
-                        }                    
-                    });
+                    if(!verbose){
+                        this.fire('select',{
+                            data : {
+                                type : type,
+                                value : string,
+                                raw : this._formatData[id]
+                            }                    
+                        });
+                    }
                     if(this.get('multiple')){
                         this._selected.push(node);
                         this._selectedValues.push(string);
@@ -592,10 +558,11 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
         *
         * @method unSelect
         * @param {Array|String} string 城市名称，如'北京'或['北京','太原']
+        * @param {boolean} verbose 是否静默
         * @return {CitySelector} this，当前实例
         * @chainable
         */
-        unSelect : function(string){
+        unSelect : function(string,verbose){
             var _ = this;
             if(S.isArray(string)){
                 S.each(string,function(item){
@@ -628,13 +595,16 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
                     <dt>raw</dt><dd>用户取消的值对应的元数据</dd>
                     </dl>
                     */
-                    this.fire('unselect',{
-                        data : {
-                            type : type,
-                            value : string,
-                            raw : this._formatData[id]
-                        }                    
-                    });
+                    if(!verbose){
+                        this.fire('unselect',{
+                            data : {
+                                type : type,
+                                value : string,
+                                raw : this._formatData[id]
+                            }                    
+                        });
+                    }
+                    
                     if(this.get('multiple')){
                         var tmpNode = [],
                             tmpString = [],
@@ -757,48 +727,6 @@ KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
             */
             data : {
                 value : DomesticData
-            },
-            /**
-			是否启用select联动功能，启用后需要提供两个select节点
-
-			@attribute linkage
-			@type boolean
-			@writeOnce
-			@default false
-			@optional
-            */
-            linkage : {
-            	value : false
-            },
-            /**
-			启用select联动功能后的省份select节点(国外对应国家)
-
-			@attribute countrySelect
-			@type HTMLElement|node|selector
-			@writeOnce
-			@optional
-            */
-            countrySelect : {
-            },
-            /**
-			启用select联动功能后的城市select节点(国外对应州、城市)
-
-			@attribute citySelect
-			@type HTMLElement|node|selector
-			@writeOnce
-			@optional
-            */
-            citySelect : {
-            },
-            /**
-			启用select联动功能后的默认国家或者省
-
-			@attribute defaultLinkageCountry
-			@type string
-			@writeOnce
-			@optional
-            */
-            defaultLinkageCountry : {
             },
             /**
             城市选择器所需要绑定的input节点

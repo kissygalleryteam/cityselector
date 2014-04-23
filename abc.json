@@ -1,12 +1,12 @@
 {
     "name": "cityselector",
-    "version": "1.3",
+    "version": "1.2",
     "desc": "基于kissy 1.3的城市选择器，支持国内和国际城市，并支持联动",
     "cover": "",
     "tag":"cityselector",
     "author": {
         "name": "baxian",
-        "email": "freyaoo@gmail.com",
+        "email": "baxian@taobao.com",
         "page": "https://github.com/enmaai"
     },
     "type": "kissy-gallery",

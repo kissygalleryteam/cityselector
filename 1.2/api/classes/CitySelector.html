@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/CitySelector.html">CitySelector</a></li>
             
+                <li><a href="../classes/Linkage.html">Linkage</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -100,7 +102,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/1.2_build_index.js.html#l64"><code>1.2\build\index.js:64</code></a>
+            Defined in: <a href="../files/1.2_build_index.js.html#l64"><code>1.2&#x2F;build&#x2F;index.js:64</code></a>
         </div>
     
 
@@ -117,13 +119,17 @@
 
 <div class="box intro">
     <p>城市选择器constructor</p>
-
-<pre class="code prettyprint"><code>   &lt;input id="#foo" type="text"&gt;    
-   KISSY.use('gallery/cityselector/1.2/index',function(S,CitySelector){
+<pre class="code prettyprint"><code>   &lt;input id=&quot;#foo&quot; type=&quot;text&quot;&gt;    
+   KISSY.use(&#39;gallery/cityselector/1.2/index&#39;,function(S,CitySelector){
    var cityselector = new CitySelector({
-       node : '#foo'
-   });
-</code></pre>
+       provinceSelect : &#39;#foo3&#39;,
+       citySelect : &#39;#foo4&#39;,
+       districtSelect : &#39;#foo10&#39;,
+       // province : &#39;黑龙江省&#39;,
+       // city : &#39;大庆市&#39;,
+       // district : &#39;红岗区&#39;
+   });</code></pre>
+
 </div>
 
 
@@ -161,7 +167,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l64"><code>1.2\build\index.js:64</code></a>
+        <a href="../files/1.2_build_index.js.html#l64"><code>1.2&#x2F;build&#x2F;index.js:64</code></a>
         
         </p>
 
@@ -219,7 +225,7 @@
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method__bindLinkage">_bindLinkage</a>
+                                <a href="#method__bindInput">_bindInput</a>
 
                                 
                                 
@@ -268,6 +274,13 @@
                             </li>
                         
                             <li class="index-item method private">
+                                <a href="#method__onSetNode">_onSetNode</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method__onSetWidth">_onSetWidth</a>
 
                                 
@@ -276,20 +289,6 @@
                         
                             <li class="index-item method private">
                                 <a href="#method__prepareData">_prepareData</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__prepareLinkageData">_prepareLinkageData</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__renderLinkage">_renderLinkage</a>
 
                                 
                                 
@@ -393,27 +392,11 @@
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_citySelect">citySelect</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_countrySelect">countrySelect</a>
-                            </li>
-                        
-                            <li class="index-item attr">
                                 <a href="#attr_data">data</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="#attr_defaultLinkageCountry">defaultLinkageCountry</a>
-                            </li>
-                        
-                            <li class="index-item attr">
                                 <a href="#attr_height">height</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="#attr_linkage">linkage</a>
                             </li>
                         
                             <li class="index-item attr">
@@ -515,7 +498,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l124"><code>1.2\build\index.js:124</code></a>
+        <a href="../files/1.2_build_index.js.html#l115"><code>1.2&#x2F;build&#x2F;index.js:115</code></a>
         
         </p>
 
@@ -527,6 +510,7 @@
 
     <div class="description">
         <p>绑定需要的事件</p>
+
     </div>
 
     
@@ -537,8 +521,8 @@
 </div>
 
                 
-                    <div id="method__bindLinkage" class="method item private">
-    <h3 class="name"><code>_bindLinkage</code></h3>
+                    <div id="method__bindInput" class="method item private">
+    <h3 class="name"><code>_bindInput</code></h3>
 
     
         <span class="paren">()</span>
@@ -571,7 +555,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l148"><code>1.2\build\index.js:148</code></a>
+        <a href="../files/1.2_build_index.js.html#l137"><code>1.2&#x2F;build&#x2F;index.js:137</code></a>
         
         </p>
 
@@ -582,7 +566,8 @@
     </div>
 
     <div class="description">
-        <p>绑定城市联动事件</p>
+        <p>绑定input节点相关事件</p>
+
     </div>
 
     
@@ -627,7 +612,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l380"><code>1.2\build\index.js:380</code></a>
+        <a href="../files/1.2_build_index.js.html#l328"><code>1.2&#x2F;build&#x2F;index.js:328</code></a>
         
         </p>
 
@@ -639,6 +624,7 @@
 
     <div class="description">
         <p>根据输入框里已存在的城市选中城市选择器中的城市</p>
+
     </div>
 
     
@@ -693,7 +679,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l449"><code>1.2\build\index.js:449</code></a>
+        <a href="../files/1.2_build_index.js.html#l400"><code>1.2&#x2F;build&#x2F;index.js:400</code></a>
         
         </p>
 
@@ -705,6 +691,7 @@
 
     <div class="description">
         <p>根据传入的节点取消城市选择</p>
+
     </div>
 
     
@@ -723,6 +710,7 @@
 
                     <div class="param-description">
                         <p>input节点</p>
+
                     </div>
 
                     
@@ -788,7 +776,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l423"><code>1.2\build\index.js:423</code></a>
+        <a href="../files/1.2_build_index.js.html#l374"><code>1.2&#x2F;build&#x2F;index.js:374</code></a>
         
         </p>
 
@@ -800,6 +788,7 @@
 
     <div class="description">
         <p>根据传入的节点和类型填充input</p>
+
     </div>
 
     
@@ -893,7 +882,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l317"><code>1.2\build\index.js:317</code></a>
+        <a href="../files/1.2_build_index.js.html#l265"><code>1.2&#x2F;build&#x2F;index.js:265</code></a>
         
         </p>
 
@@ -905,6 +894,7 @@
 
     <div class="description">
         <p>选择字母筛选触发的处理方法</p>
+
     </div>
 
     
@@ -972,7 +962,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l485"><code>1.2\build\index.js:485</code></a>
+        <a href="../files/1.2_build_index.js.html#l451"><code>1.2&#x2F;build&#x2F;index.js:451</code></a>
         
         </p>
 
@@ -983,7 +973,8 @@
     </div>
 
     <div class="description">
-        <p>设置'height'属性时执行</p>
+        <p>设置&#39;height&#39;属性时执行</p>
+
     </div>
 
     
@@ -1028,7 +1019,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l460"><code>1.2\build\index.js:460</code></a>
+        <a href="../files/1.2_build_index.js.html#l411"><code>1.2&#x2F;build&#x2F;index.js:411</code></a>
         
         </p>
 
@@ -1039,7 +1030,65 @@
     </div>
 
     <div class="description">
-        <p>设置'autoWidth'属性时执行</p>
+        <p>设置&#39;autoWidth&#39;属性时执行</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__onSetNode" class="method item private">
+    <h3 class="name"><code>_onSetNode</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/1.2_build_index.js.html#l424"><code>1.2&#x2F;build&#x2F;index.js:424</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>设置&#39;node&#39;时执行</p>
+
     </div>
 
     
@@ -1084,7 +1133,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l473"><code>1.2\build\index.js:473</code></a>
+        <a href="../files/1.2_build_index.js.html#l442"><code>1.2&#x2F;build&#x2F;index.js:442</code></a>
         
         </p>
 
@@ -1095,7 +1144,8 @@
     </div>
 
     <div class="description">
-        <p>设置'width'属性时执行</p>
+        <p>设置&#39;width&#39;属性时执行</p>
+
     </div>
 
     
@@ -1144,7 +1194,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l167"><code>1.2\build\index.js:167</code></a>
+        <a href="../files/1.2_build_index.js.html#l154"><code>1.2&#x2F;build&#x2F;index.js:154</code></a>
         
         </p>
 
@@ -1156,6 +1206,7 @@
 
     <div class="description">
         <p>预处理城市数据，主要是为了后面的dom操作方便</p>
+
     </div>
 
     
@@ -1169,122 +1220,11 @@
                     
                         <span class="type">Array</span>:
                     
-                    letters 字母数组
+                    <p>letters 字母数组</p>
+
                 
             </div>
         </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method__prepareLinkageData" class="method item private">
-    <h3 class="name"><code>_prepareLinkageData</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l205"><code>1.2\build\index.js:205</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>预处理联动数据</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__renderLinkage" class="method item private">
-    <h3 class="name"><code>_renderLinkage</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l223"><code>1.2\build\index.js:223</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>渲染联动数据</p>
-    </div>
-
-    
-
     
 
     
@@ -1335,7 +1275,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l393"><code>1.2\build\index.js:393</code></a>
+        <a href="../files/1.2_build_index.js.html#l344"><code>1.2&#x2F;build&#x2F;index.js:344</code></a>
         
         </p>
 
@@ -1347,6 +1287,7 @@
 
     <div class="description">
         <p>选中城市时的事件执行</p>
+
     </div>
 
     
@@ -1424,7 +1365,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l408"><code>1.2\build\index.js:408</code></a>
+        <a href="../files/1.2_build_index.js.html#l359"><code>1.2&#x2F;build&#x2F;index.js:359</code></a>
         
         </p>
 
@@ -1436,6 +1377,7 @@
 
     <div class="description">
         <p>选中省(国际对应国家)时的事件执行</p>
+
     </div>
 
     
@@ -1513,7 +1455,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l332"><code>1.2\build\index.js:332</code></a>
+        <a href="../files/1.2_build_index.js.html#l280"><code>1.2&#x2F;build&#x2F;index.js:280</code></a>
         
         </p>
 
@@ -1525,6 +1467,7 @@
 
     <div class="description">
         <p>根据指定的字母处理dom</p>
+
     </div>
 
     
@@ -1542,7 +1485,8 @@
                     
 
                     <div class="param-description">
-                        <p>指定的字母,26个字母加单词'all'</p>
+                        <p>指定的字母,26个字母加单词&#39;all&#39;</p>
+
                     </div>
 
                     
@@ -1602,7 +1546,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l368"><code>1.2\build\index.js:368</code></a>
+        <a href="../files/1.2_build_index.js.html#l316"><code>1.2&#x2F;build&#x2F;index.js:316</code></a>
         
         </p>
 
@@ -1614,6 +1558,7 @@
 
     <div class="description">
         <p>收起或展开省下面的城市</p>
+
     </div>
 
     
@@ -1683,7 +1628,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l683"><code>1.2\build\index.js:683</code></a>
+        <a href="../files/1.2_build_index.js.html#l653"><code>1.2&#x2F;build&#x2F;index.js:653</code></a>
         
         </p>
 
@@ -1695,6 +1640,7 @@
 
     <div class="description">
         <p>获取用户当前已经选中的城市列表</p>
+
     </div>
 
     
@@ -1708,7 +1654,8 @@
                     
                         <span class="type">Array</span>:
                     
-                    选中的城市列表，['北京','太原']
+                    <p>选中的城市列表，[&#39;北京&#39;,&#39;太原&#39;]</p>
+
                 
             </div>
         </div>
@@ -1727,7 +1674,7 @@
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -1756,7 +1703,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l533"><code>1.2\build\index.js:533</code></a>
+        <a href="../files/1.2_build_index.js.html#l496"><code>1.2&#x2F;build&#x2F;index.js:496</code></a>
         
         </p>
 
@@ -1768,6 +1715,7 @@
 
     <div class="description">
         <p>隐藏城市选择器</p>
+
     </div>
 
     
@@ -1779,9 +1727,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this，当前实例
+                    <p>this，当前实例</p>
+
                 
             </div>
         </div>
@@ -1800,7 +1749,7 @@
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -1829,7 +1778,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l257"><code>1.2\build\index.js:257</code></a>
+        <a href="../files/1.2_build_index.js.html#l192"><code>1.2&#x2F;build&#x2F;index.js:192</code></a>
         
         </p>
 
@@ -1841,6 +1790,7 @@
 
     <div class="description">
         <p>渲染城市选择器</p>
+
     </div>
 
     
@@ -1852,9 +1802,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this,当前实例
+                    <p>this,当前实例</p>
+
                 
             </div>
         </div>
@@ -1877,13 +1828,19 @@
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code>verbose</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -1912,7 +1869,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l544"><code>1.2\build\index.js:544</code></a>
+        <a href="../files/1.2_build_index.js.html#l507"><code>1.2&#x2F;build&#x2F;index.js:507</code></a>
         
         </p>
 
@@ -1924,6 +1881,7 @@
 
     <div class="description">
         <p>选中指定城市</p>
+
     </div>
 
     
@@ -1941,7 +1899,24 @@
                     
 
                     <div class="param-description">
-                        <p>城市名称，如'北京'或['北京','太原']</p>
+                        <p>城市名称，如&#39;北京&#39;或[&#39;北京&#39;,&#39;太原&#39;]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">verbose</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>是否静默，如果为true，则不触发select事件</p>
+
                     </div>
 
                     
@@ -1958,9 +1933,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this，当前实例
+                    <p>this，当前实例</p>
+
                 
             </div>
         </div>
@@ -1972,9 +1948,9 @@
 
             <div class="example-content">
                 <pre class="code prettyprint"><code>   var cityselector = new CitySelector(config);
-   cityselector.select('北京'); //会选中北京
-   cityselector.select(['北京','杭州']); //会选中北京和杭州
-</code></pre>
+   cityselector.select(&#39;北京&#39;); //会选中北京
+   cityselector.select([&#39;北京&#39;,&#39;杭州&#39;]); //会选中北京和杭州</code></pre>
+
             </div>
         </div>
     
@@ -2000,7 +1976,7 @@
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -2029,7 +2005,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l499"><code>1.2\build\index.js:499</code></a>
+        <a href="../files/1.2_build_index.js.html#l462"><code>1.2&#x2F;build&#x2F;index.js:462</code></a>
         
         </p>
 
@@ -2041,6 +2017,7 @@
 
     <div class="description">
         <p>根据指定的字母切换到相应字母filter</p>
+
     </div>
 
     
@@ -2058,7 +2035,8 @@
                     
 
                     <div class="param-description">
-                        <p>指定的字母,'abcdefghijklmnopqrstuvwxyz'加单词'all'</p>
+                        <p>指定的字母,&#39;abcdefghijklmnopqrstuvwxyz&#39;加单词&#39;all&#39;</p>
+
                     </div>
 
                     
@@ -2075,9 +2053,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this，当前实例
+                    <p>this，当前实例</p>
+
                 
             </div>
         </div>
@@ -2088,9 +2067,9 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>   cityselector.setLetter('x'); //选中所有以'X'为拼音首字母的省
-   cityselector.setLetter('all'); //选中全部
-</code></pre>
+                <pre class="code prettyprint"><code>   cityselector.setLetter(&#39;x&#39;); //选中所有以&#39;X&#39;为拼音首字母的省
+   cityselector.setLetter(&#39;all&#39;); //选中全部</code></pre>
+
             </div>
         </div>
     
@@ -2106,7 +2085,7 @@
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -2135,7 +2114,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l522"><code>1.2\build\index.js:522</code></a>
+        <a href="../files/1.2_build_index.js.html#l485"><code>1.2&#x2F;build&#x2F;index.js:485</code></a>
         
         </p>
 
@@ -2147,6 +2126,7 @@
 
     <div class="description">
         <p>显示城市选择器</p>
+
     </div>
 
     
@@ -2158,9 +2138,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this，当前实例
+                    <p>this，当前实例</p>
+
                 
             </div>
         </div>
@@ -2183,13 +2164,19 @@
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code>verbose</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
 
     
         <span class="returns-inline">
-            <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>
+            <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>
         </span>
     
 
@@ -2218,7 +2205,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l612"><code>1.2\build\index.js:612</code></a>
+        <a href="../files/1.2_build_index.js.html#l578"><code>1.2&#x2F;build&#x2F;index.js:578</code></a>
         
         </p>
 
@@ -2230,6 +2217,7 @@
 
     <div class="description">
         <p>取消选中指定城市，与select相反</p>
+
     </div>
 
     
@@ -2247,7 +2235,24 @@
                     
 
                     <div class="param-description">
-                        <p>城市名称，如'北京'或['北京','太原']</p>
+                        <p>城市名称，如&#39;北京&#39;或[&#39;北京&#39;,&#39;太原&#39;]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">verbose</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>是否静默</p>
+
                     </div>
 
                     
@@ -2264,9 +2269,10 @@
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="..\classes\CitySelector.html" class="crosslink">CitySelector</a></span>:
+                        <span class="type"><a href="../classes/CitySelector.html" class="crosslink">CitySelector</a></span>:
                     
-                    this，当前实例
+                    <p>this，当前实例</p>
+
                 
             </div>
         </div>
@@ -2318,7 +2324,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l728"><code>1.2\build\index.js:728</code></a>
+        <a href="../files/1.2_build_index.js.html#l698"><code>1.2&#x2F;build&#x2F;index.js:698</code></a>
         
         </p>
 
@@ -2329,6 +2335,7 @@
 
     <div class="description">
         <p>城市选择器默认宽度与input一致</p>
+
     </div>
 
     
@@ -2373,7 +2380,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l750"><code>1.2\build\index.js:750</code></a>
+        <a href="../files/1.2_build_index.js.html#l720"><code>1.2&#x2F;build&#x2F;index.js:720</code></a>
         
         </p>
 
@@ -2384,116 +2391,11 @@
 
     <div class="description">
         <p>省是否可以选择</p>
+
     </div>
 
     
         <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_citySelect" class="attr item">
-    <a name="config_citySelect"></a> 
-    <h3 class="name"><code>citySelect</code></h3>
-    <span class="type">HTMLElement | Node | Selector</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag optional">optional</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l805"><code>1.2\build\index.js:805</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>启用select联动功能后的城市select节点(国外对应州、城市)</p>
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_countrySelect" class="attr item">
-    <a name="config_countrySelect"></a> 
-    <h3 class="name"><code>countrySelect</code></h3>
-    <span class="type">HTMLElement | Node | Selector</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag optional">optional</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l795"><code>1.2\build\index.js:795</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>启用select联动功能后的省份select节点(国外对应国家)</p>
-    </div>
-
     
 
     
@@ -2532,7 +2434,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l773"><code>1.2\build\index.js:773</code></a>
+        <a href="../files/1.2_build_index.js.html#l743"><code>1.2&#x2F;build&#x2F;index.js:743</code></a>
         
         </p>
 
@@ -2543,59 +2445,7 @@
 
     <div class="description">
         <p>城市选择器需要的数据</p>
-    </div>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_defaultLinkageCountry" class="attr item">
-    <a name="config_defaultLinkageCountry"></a> 
-    <h3 class="name"><code>defaultLinkageCountry</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag optional">optional</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l815"><code>1.2\build\index.js:815</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>启用select联动功能后的默认国家或者省</p>
     </div>
 
     
@@ -2638,7 +2488,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l717"><code>1.2\build\index.js:717</code></a>
+        <a href="../files/1.2_build_index.js.html#l687"><code>1.2&#x2F;build&#x2F;index.js:687</code></a>
         
         </p>
 
@@ -2649,65 +2499,11 @@
 
     <div class="description">
         <p>设置城市选择器的高度</p>
+
     </div>
 
     
         <p><strong>Default:</strong> 400</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="attr_linkage" class="attr item">
-    <a name="config_linkage"></a> 
-    <h3 class="name"><code>linkage</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag optional">optional</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/1.2_build_index.js.html#l783"><code>1.2\build\index.js:783</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>是否启用select联动功能，启用后需要提供两个select节点</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
     
 
     
@@ -2748,7 +2544,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l739"><code>1.2\build\index.js:739</code></a>
+        <a href="../files/1.2_build_index.js.html#l709"><code>1.2&#x2F;build&#x2F;index.js:709</code></a>
         
         </p>
 
@@ -2759,6 +2555,7 @@
 
     <div class="description">
         <p>是否支持多选</p>
+
     </div>
 
     
@@ -2801,7 +2598,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l825"><code>1.2\build\index.js:825</code></a>
+        <a href="../files/1.2_build_index.js.html#l753"><code>1.2&#x2F;build&#x2F;index.js:753</code></a>
         
         </p>
 
@@ -2812,6 +2609,7 @@
 
     <div class="description">
         <p>城市选择器所需要绑定的input节点</p>
+
     </div>
 
     
@@ -2854,7 +2652,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l761"><code>1.2\build\index.js:761</code></a>
+        <a href="../files/1.2_build_index.js.html#l731"><code>1.2&#x2F;build&#x2F;index.js:731</code></a>
         
         </p>
 
@@ -2865,6 +2663,7 @@
 
     <div class="description">
         <p>设置城市选择器的class前缀，只设置了一个，如果需要自定义样式，可使用此命名空间重置</p>
+
     </div>
 
     
@@ -2909,7 +2708,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l832"><code>1.2\build\index.js:832</code></a>
+        <a href="../files/1.2_build_index.js.html#l760"><code>1.2&#x2F;build&#x2F;index.js:760</code></a>
         
         </p>
 
@@ -2920,6 +2719,7 @@
 
     <div class="description">
         <p>城市选择器渲染的父容器，如果不提供则使用overlay方式</p>
+
     </div>
 
     
@@ -2962,7 +2762,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l694"><code>1.2\build\index.js:694</code></a>
+        <a href="../files/1.2_build_index.js.html#l664"><code>1.2&#x2F;build&#x2F;index.js:664</code></a>
         
         </p>
 
@@ -2973,6 +2773,7 @@
 
     <div class="description">
         <p>设置城市选择器的触发方式，在不设置render的情况下有效，会以overlay的方式呈现</p>
+
     </div>
 
     
@@ -3017,7 +2818,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l706"><code>1.2\build\index.js:706</code></a>
+        <a href="../files/1.2_build_index.js.html#l676"><code>1.2&#x2F;build&#x2F;index.js:676</code></a>
         
         </p>
 
@@ -3028,6 +2829,7 @@
 
     <div class="description">
         <p>设置城市选择器的宽度</p>
+
     </div>
 
     
@@ -3071,7 +2873,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l349"><code>1.2\build\index.js:349</code></a>
+        <a href="../files/1.2_build_index.js.html#l297"><code>1.2&#x2F;build&#x2F;index.js:297</code></a>
         
         </p>
 
@@ -3082,6 +2884,7 @@
 
     <div class="description">
         <p>当用户切换首字母时触发</p>
+
     </div>
 
     
@@ -3100,9 +2903,8 @@
 
                     <div class="param-description">
                         <p>提供用户当前选择的首字母</p>
-
 <dl>
-<dt>letter</dt><dd>用户选中的字母，如'x','a','all'</dd>
+<dt>letter</dt><dd>用户选中的字母，如&#39;x&#39;,&#39;a&#39;,&#39;all&#39;</dd>
 </dl>
                     </div>
 
@@ -3141,7 +2943,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l581"><code>1.2\build\index.js:581</code></a>
+        <a href="../files/1.2_build_index.js.html#l545"><code>1.2&#x2F;build&#x2F;index.js:545</code></a>
         
         </p>
 
@@ -3152,6 +2954,7 @@
 
     <div class="description">
         <p>当用户选择时触发</p>
+
     </div>
 
     
@@ -3170,10 +2973,9 @@
 
                     <div class="param-description">
                         <p>提供用户选择的一些信息</p>
-
 <dl>
-<dt>type</dt><dd>用户选中的类型，'city'或'province'</dd>
-<dt>value</dt><dd>用户选中的值，'北京'</dd>
+<dt>type</dt><dd>用户选中的类型，&#39;city&#39;或&#39;province&#39;</dd>
+<dt>value</dt><dd>用户选中的值，&#39;北京&#39;</dd>
 <dt>raw</dt><dd>用户选中的值对应的元数据</dd>
 </dl>
                     </div>
@@ -3213,7 +3015,7 @@
             
         
         
-        <a href="../files/1.2_build_index.js.html#l643"><code>1.2\build\index.js:643</code></a>
+        <a href="../files/1.2_build_index.js.html#l610"><code>1.2&#x2F;build&#x2F;index.js:610</code></a>
         
         </p>
 
@@ -3224,6 +3026,7 @@
 
     <div class="description">
         <p>当用户取消选择时触发</p>
+
     </div>
 
     
@@ -3242,10 +3045,9 @@
 
                     <div class="param-description">
                         <p>提供用户取消的一些信息</p>
-
 <dl>
-<dt>type</dt><dd>用户取消的类型，'city'或'province'</dd>
-<dt>value</dt><dd>用户取消的值，'北京'</dd>
+<dt>type</dt><dd>用户取消的类型，&#39;city&#39;或&#39;province&#39;</dd>
+<dt>value</dt><dd>用户取消的值，&#39;北京&#39;</dd>
 <dt>raw</dt><dd>用户取消的值对应的元数据</dd>
 </dl>
                     </div>

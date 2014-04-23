@@ -35,6 +35,12 @@ module.exports = function(grunt) {
                     },{
                         src : '<%= pkg.version %>/foreign.js',
                         dest : '<%= pkg.version %>/build/foreign.js'
+                    },{
+                        src : '<%= pkg.version %>/linkage-data.js',
+                        dest : '<%= pkg.version %>/build/linkage-data.js'
+                    },{
+                        src : '<%= pkg.version %>/linkage.js',
+                        dest : '<%= pkg.version %>/build/linkage.js'
                     }
                 ]
             }

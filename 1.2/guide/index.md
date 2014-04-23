@@ -13,6 +13,28 @@ cityselector是一个简单的城市选择器，支持国内国际城市，支�
 
 ## 快速使用
 
+### 使用城市联动
+
+    <select id="foo1"></select>
+    <select id="foo2"></select>
+    <select id="foo3"></select>
+    <script>
+        KISSY.use('gallery/cityselector/1.2/linkage',function(S,CitySelector){
+            var cityselector = new CitySelector({
+                provinceSelect : '#foo3',
+                citySelect : '#foo4',
+                districtSelect : '#foo10',
+                province : '山东省', //默认选中省
+                city : '', //默认城市
+                district : ''
+            });
+            cityselector.on('afterProvinceChange',function(e){
+                console.log(e.newVal);
+                console.log(e.prevVal);
+            });
+        });
+    </script>
+
 ### 初始化组件
 
 	<div id="foo"></div>
@@ -63,6 +85,19 @@ cityselector是一个简单的城市选择器，支持国内国际城市，支�
 				citySelect : '#foo4', //城市select
 				defaultLinkageCountry : '山西' //默认选中国家或省份
             });
+        });
+    </script>
+
+### 更改input node
+
+    <input id="foo1" type="text">
+    <input id="foo2" type="text">
+    <script>
+        KISSY.use('gallery/cityselector/1.2/index', function (S,CitySelector) {
+            var citySelector = new CitySelector({
+                node : '#foo1' //cityselector与foo1绑定
+            });
+            citySelector.set('node','#foo2'); //cityselector与foo2绑定
         });
     </script>
 

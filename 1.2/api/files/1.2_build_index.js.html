@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>1.2\build\index.js - The cityselector API</title>
+    <title>1.2/build/index.js - The cityselector API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -42,6 +42,8 @@
             <ul id="api-classes" class="apis classes">
             
                 <li><a href="../classes/CitySelector.html">CitySelector</a></li>
+            
+                <li><a href="../classes/Linkage.html">Linkage</a></li>
             
             </ul>
 
@@ -88,7 +90,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: 1.2\build\index.js</h1>
+                        <h1 class="file-heading">File: 1.2/build/index.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -161,7 +163,12 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
         &lt;input id=&quot;#foo&quot; type=&quot;text&quot;&gt;    
         KISSY.use(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,CitySelector){
         var cityselector = new CitySelector({
-            node : &#x27;#foo&#x27;
+            provinceSelect : &#x27;#foo3&#x27;,
+            citySelect : &#x27;#foo4&#x27;,
+            districtSelect : &#x27;#foo10&#x27;,
+            // province : &#x27;黑龙江省&#x27;,
+            // city : &#x27;大庆市&#x27;,
+            // district : &#x27;红岗区&#x27;
         });
 
     *
@@ -175,34 +182,20 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
     		var _ = this;
             _._node = S.one(_.get(&#x27;node&#x27;));
             _._renderNode = S.one(_.get(&#x27;render&#x27;));
-            if(!_.get(&#x27;linkage&#x27;)){
-            	if(!_._node &amp;&amp; !_._renderNode){
-	                S.log(&#x27;cityselector::node and render are not find,cityselector init failured!&#x27;);
-	                return;
-	            }
-	            if(!_.get(&#x27;data&#x27;)){
-	            	S.log(&#x27;cityselector::cityselector\&#x27;s data is undefined,cityselector init failured!&#x27;);
-	            	return;
-	            }
-            }            
+        	if(!_._node &amp;&amp; !_._renderNode){
+                S.log(&#x27;cityselector::node and render are not find,cityselector init failured!&#x27;);
+                return;
+            }
+            if(!_.get(&#x27;data&#x27;)){
+            	S.log(&#x27;cityselector::cityselector\&#x27;s data is undefined,cityselector init failured!&#x27;);
+            	return;
+            }         
             _._id = S.guid();
             _._selected = []; 
             _._selectedValues = [];
-            if(_.get(&#x27;linkage&#x27;)){
-            	if(!_.get(&#x27;countrySelect&#x27;) || !_.get(&#x27;citySelect&#x27;)){
-            		S.log(&#x27;cityselector::countrySelect and citySelect is needed!&#x27;);
-            		return;
-            	}
-            	_.countryNode = S.one(_.get(&#x27;countrySelect&#x27;));
-            	_.cityNode = S.one(_.get(&#x27;citySelect&#x27;));
-            	_._prepareLinkageData();
-            	_._renderLinkage();
-            	_._bindLinkage();
-            }else{
-            	_.render();
-	            _._node &amp;&amp; _._checkCity();
-	            _._bind();
-            }           
+        	_.render();
+            _._node &amp;&amp; _._checkCity();
+            _._bind();      
     	},
         destructor : function(){
         	var _ = this;
@@ -234,29 +227,25 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
                 _._contentEl.on(&#x27;click&#x27;,function(e){
                     e.stopPropagation();
                 });
-                _._node.on(&#x27;click&#x27;,function(e){
-                    e.stopPropagation();
-                });
+                _._bindInput();
             }
         },
         /**
-		绑定城市联动事件
-
-		@method _bindLinkage
-		@private
-        */
-        _bindLinkage : function(){
-        	var _ = this;
-        	_.countryNode.on(&#x27;change&#x27;,function(e){
-        		var city = _.countryNode.val(),
-        			citys = _.linkageData[city].city;
-        		_.cityNode[0].options.length = 0;
-        		S.each(citys,function(item,index){
-        			var op = new Option(item.name,item.name);
-        			op.setAttribute(&#x27;data-code&#x27;,item.code);
-        			_.cityNode[0].options.add(op);
-        		});
-        	},_);
+         * 绑定input节点相关事件
+         * 
+         * @method _bindInput
+         * @private
+         */
+        _bindInput : function(){
+            var _ = this;
+            _.nodePropagationHandler = function(e){
+                e.stopPropagation();
+            };
+            _.nodeFocusHandler = function(e){
+                _._overlay.show();
+            };
+            _._node.on(&#x27;click&#x27;,_.nodePropagationHandler);
+            _._node.on(&#x27;focus&#x27;,_.nodeFocusHandler);
         },
         /**
         * 预处理城市数据，主要是为了后面的dom操作方便
@@ -297,58 +286,6 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
             return letters;
         },
         /**
-		预处理联动数据
-
-		@method _prepareLinkageData
-		@private
-        */
-        _prepareLinkageData : function(){
-        	var _ = this,
-        		data = _.get(&#x27;data&#x27;);
-        	_.linkageData = {};
-        	S.each(data,function(item){
-        		_.linkageData[item.name] = {
-        			name : item.name,
-        			code : item.code,
-        			city : item.city ? item.city : [item]
-        		}
-        	});
-        },
-        /**
-		渲染联动数据
-
-		@method _renderLinkage
-		@private
-        */
-        _renderLinkage : function(){
-        	var _ = this,
-        		defaultCountry,
-        		defaultCountryData,
-        		citys;
-        	if(_.get(&#x27;defaultLinkageCountry&#x27;)){
-        		defaultCountry = _.get(&#x27;defaultLinkageCountry&#x27;);
-        	}else{
-        		defaultCountry = _.get(&#x27;data&#x27;)[0].name;
-        	}
-        	defaultCountryData = _.linkageData[defaultCountry];
-        	_.countryNode[0].options.length = 0;
-        	S.each(_.linkageData,function(val,key){
-        		var op = new Option(val.name,val.name);
-        		op.setAttribute(&#x27;data-code&#x27;,val.code);
-        		_.countryNode[0].options.add(op);
-        	});
-        	if(_.get(&#x27;defaultLinkageCountry&#x27;)){
-        		_.countryNode[0].value = defaultCountry;
-        	}
-        	if(defaultCountryData){        		
-        		S.each(defaultCountryData.city,function(item,index){
-        			var op = new Option(item.name,item.name);
-        			op.setAttribute(&#x27;data-code&#x27;,item.code);
-        			_.cityNode[0].options.add(op);
-        		});
-        	}
-        },
-        /**
         * 渲染城市选择器
         *
         * @method render
@@ -383,29 +320,42 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
                 listheight : this.get(HEIGHT) - 50
             };
             
-            this._contentEl = S.one(TMPL.render(obj));
-            this._navEl = this._contentEl.one(&#x27;#ks-cityselector&#x27;+this._id+&#x27;-nav&#x27;);
-            this._listEl = this._contentEl.one(&#x27;#ks-cityselector&#x27;+this._id+&#x27;-citylist&#x27;);
             if(this._renderNode){
-                this._renderNode.append(this._contentEl);
+                this._renderNode.append(TMPL.render(obj));
             }else{
-                this._overlay = new Overlay.Popup({
+                // this._overlay = new Overlay.Popup({
+                //     prefixCls : &#x27;ks-cityselector-&#x27;,
+                //     width : w,
+                //     trigger : this._node,
+                //     visible : false,
+                //     align : {
+                //         node : this._node,
+                //         points : [&#x27;bl&#x27;,&#x27;tl&#x27;],
+                //         offset :[-1,0]
+                //     },
+                //     content : this._contentEl
+                // });
+                
+                this._overlay = new Overlay({
                     prefixCls : &#x27;ks-cityselector-&#x27;,
                     width : w,
-                    trigger : this._node,
                     visible : false,
-                    align : {
-                        node : this._node,
-                        points : [&#x27;bl&#x27;,&#x27;tl&#x27;],
-                        offset :[-1,0]
-                    },
-                    content : this._contentEl
-                });
+                    //srcNode : srcNode
+                    content : TMPL.render(obj)
+                }).render();
               
                 this._overlay.on(&#x27;show&#x27;,function(){
+                    _._overlay.set(&#x27;align&#x27;,{
+                        node : _._node,
+                        points : [&#x27;bl&#x27;,&#x27;tl&#x27;],
+                        offset : [-1,0]
+                    });
                     _._checkCity();
                 });
             }
+            this._contentEl = S.one(&#x27;#ks-cityselector&#x27;+this._id);
+            this._navEl = this._contentEl.one(&#x27;#ks-cityselector&#x27;+this._id+&#x27;-nav&#x27;);
+            this._listEl = this._contentEl.one(&#x27;#ks-cityselector&#x27;+this._id+&#x27;-citylist&#x27;);
             return this;
         },
         /**
@@ -479,8 +429,11 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
         */
         _checkCity : function(){
             var _ = this,
-                val = this._node.val().split(&#x27;,&#x27;);
-            S.each(val,function(item){
+                val = S.trim(this._node.val());
+            if(!val){
+                return;
+            }
+            S.each(val.split(&#x27;,&#x27;),function(item){
                 item &amp;&amp; _.select(item);
             });
         },
@@ -565,15 +518,30 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
             }            
         },
         /**
+         * 设置&#x27;node&#x27;时执行
+         *
+         * @method _onSetNode
+         * @private
+         */
+        _onSetNode : function(){
+            var _ = this,
+                node = S.one(_.get(&#x27;node&#x27;));
+            if(node){
+                _._node.detach(&#x27;click&#x27;,_.nodePropagationHandler);
+                _._node.detach(&#x27;focus&#x27;,_.nodeFocusHandler);
+                _._node = node;
+                _._selected = [];
+                _._selectedValues = [];
+                _._bindInput();
+            }
+        },
+        /**
         * 设置&#x27;width&#x27;属性时执行
         *
         * @method _onSetWidth
         * @private
         */
         _onSetWidth : function(){
-        	if(this.get(&#x27;linkage&#x27;)){
-        		return;
-        	}
             this._contentEl.css(WIDTH,this.get(WIDTH));
         },
         /**
@@ -583,9 +551,6 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
         * @private
         */
         _onSetHeight : function(){
-        	if(this.get(&#x27;linkage&#x27;)){
-        		return;
-        	}
             var h = this.get(HEIGHT);
             this._contentEl.css(HEIGHT,h);
             this._listEl.css(HEIGHT,h - 50);
@@ -640,6 +605,7 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
         *
         * @method select
         * @param {Array|String} string 城市名称，如&#x27;北京&#x27;或[&#x27;北京&#x27;,&#x27;太原&#x27;]
+        * @param {boolean} verbose 是否静默，如果为true，则不触发select事件
         * @return {CitySelector} this，当前实例
         * @example
 
@@ -649,7 +615,7 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
 
         * @chainable
         */
-        select : function(string){
+        select : function(string,verbose){
             var _ = this;
             if(S.isArray(string)){
                 S.each(string,function(item){
@@ -682,13 +648,15 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
                     &lt;dt&gt;raw&lt;/dt&gt;&lt;dd&gt;用户选中的值对应的元数据&lt;/dd&gt;
                     &lt;/dl&gt;
                     */
-                    this.fire(&#x27;select&#x27;,{
-                        data : {
-                            type : type,
-                            value : string,
-                            raw : this._formatData[id]
-                        }                    
-                    });
+                    if(!verbose){
+                        this.fire(&#x27;select&#x27;,{
+                            data : {
+                                type : type,
+                                value : string,
+                                raw : this._formatData[id]
+                            }                    
+                        });
+                    }
                     if(this.get(&#x27;multiple&#x27;)){
                         this._selected.push(node);
                         this._selectedValues.push(string);
@@ -708,10 +676,11 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
         *
         * @method unSelect
         * @param {Array|String} string 城市名称，如&#x27;北京&#x27;或[&#x27;北京&#x27;,&#x27;太原&#x27;]
+        * @param {boolean} verbose 是否静默
         * @return {CitySelector} this，当前实例
         * @chainable
         */
-        unSelect : function(string){
+        unSelect : function(string,verbose){
             var _ = this;
             if(S.isArray(string)){
                 S.each(string,function(item){
@@ -744,13 +713,16 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
                     &lt;dt&gt;raw&lt;/dt&gt;&lt;dd&gt;用户取消的值对应的元数据&lt;/dd&gt;
                     &lt;/dl&gt;
                     */
-                    this.fire(&#x27;unselect&#x27;,{
-                        data : {
-                            type : type,
-                            value : string,
-                            raw : this._formatData[id]
-                        }                    
-                    });
+                    if(!verbose){
+                        this.fire(&#x27;unselect&#x27;,{
+                            data : {
+                                type : type,
+                                value : string,
+                                raw : this._formatData[id]
+                            }                    
+                        });
+                    }
+                    
                     if(this.get(&#x27;multiple&#x27;)){
                         var tmpNode = [],
                             tmpString = [],
@@ -873,48 +845,6 @@ KISSY.add(&#x27;gallery/cityselector/1.2/index&#x27;,function(S,Node,Event,Richb
             */
             data : {
                 value : DomesticData
-            },
-            /**
-			是否启用select联动功能，启用后需要提供两个select节点
-
-			@attribute linkage
-			@type boolean
-			@writeOnce
-			@default false
-			@optional
-            */
-            linkage : {
-            	value : false
-            },
-            /**
-			启用select联动功能后的省份select节点(国外对应国家)
-
-			@attribute countrySelect
-			@type HTMLElement|node|selector
-			@writeOnce
-			@optional
-            */
-            countrySelect : {
-            },
-            /**
-			启用select联动功能后的城市select节点(国外对应州、城市)
-
-			@attribute citySelect
-			@type HTMLElement|node|selector
-			@writeOnce
-			@optional
-            */
-            citySelect : {
-            },
-            /**
-			启用select联动功能后的默认国家或者省
-
-			@attribute defaultLinkageCountry
-			@type string
-			@writeOnce
-			@optional
-            */
-            defaultLinkageCountry : {
             },
             /**
             城市选择器所需要绑定的input节点
