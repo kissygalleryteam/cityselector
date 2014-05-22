@@ -58,7 +58,9 @@ module.exports = function(grunt) {
                 files: {
                     '<%= pkg.version %>/build/index-min.js': ['<%= pkg.version %>/build/index.js'],
                     '<%= pkg.version %>/build/domestic-min.js': ['<%= pkg.version %>/build/domestic.js'],
-                    '<%= pkg.version %>/build/foreign-min.js': ['<%= pkg.version %>/build/foreign.js']                    
+                    '<%= pkg.version %>/build/foreign-min.js': ['<%= pkg.version %>/build/foreign.js'],                    
+                    '<%= pkg.version %>/build/linkage-min.js': ['<%= pkg.version %>/build/linkage.js'],                    
+                    '<%= pkg.version %>/build/linkage-data-min.js': ['<%= pkg.version %>/build/linkage-data.js']                    
                 }
             }
         },
