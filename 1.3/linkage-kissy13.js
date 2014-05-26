@@ -60,6 +60,7 @@ KISSY.add(function(S,Data,Base){
             _.districtNode = S.one(_.get('districtSelect'));
             _._render();
             _._bind();
+            _.initialized = true;
         },
         destructor : function(){
 
@@ -261,6 +262,9 @@ KISSY.add(function(S,Data,Base){
             province : {
                 value : DEFAULTPROVINCE,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var inData = false;
                     if(val == DEFAULTPROVINCE){
                         inData = true;
@@ -277,6 +281,9 @@ KISSY.add(function(S,Data,Base){
             city : {
                 value : DEFAULTCITY,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.cityNode[0].options;
@@ -291,6 +298,9 @@ KISSY.add(function(S,Data,Base){
             district : {
                 value : DEFAULTDISTRICT,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.districtNode[0].options;

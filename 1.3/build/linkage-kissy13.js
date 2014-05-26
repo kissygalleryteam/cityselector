@@ -2,7 +2,7 @@
 combined files : 
 
 gallery/cityselector/1.3/linkage-data
-gallery/cityselector/1.3/linkage
+gallery/cityselector/1.3/linkage-kissy13
 
 */
 /**
@@ -26,7 +26,7 @@ KISSY.add('gallery/cityselector/1.3/linkage-data',function(){
  * @author freyaoo@gmail.com
  * @version 1.3
  */
-KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
+KISSY.add('gallery/cityselector/1.3/linkage-kissy13',function(S,Data,Base){
     'use strict';
 
     /**
@@ -81,6 +81,7 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
             _.districtNode = S.one(_.get('districtSelect'));
             _._render();
             _._bind();
+            _.initialized = true;
         },
         destructor : function(){
 
@@ -282,6 +283,9 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
             province : {
                 value : DEFAULTPROVINCE,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var inData = false;
                     if(val == DEFAULTPROVINCE){
                         inData = true;
@@ -298,6 +302,9 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
             city : {
                 value : DEFAULTCITY,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.cityNode[0].options;
@@ -312,6 +319,9 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
             district : {
                 value : DEFAULTDISTRICT,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.districtNode[0].options;

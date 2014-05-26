@@ -29,3 +29,4 @@
     [!] 删除index.js中多余的逗号，解决ie6，7报错
     [!] 1.2未压缩linkage和linkage-data，fix
     [!] 修正province的validator跳过'请选择省'的问题
+    [+] 增加linkage-kissy13.js以支持kissy 1.3.0

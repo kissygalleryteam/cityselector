@@ -3,7 +3,7 @@
 cityselector是一个简单的城市选择器，支持国内国际城市，支持overlay模式和select联动模式。
 
 - 版本 : 1.3
-- kissy版本 : 1.3
+- kissy版本 : 1.4.0
 - author : 霸先
 - email : freyaoo@gmail.com
 
@@ -34,6 +34,8 @@ cityselector是一个简单的城市选择器，支持国内国际城市，支�
             });
         });
     </script>
+    
+    注意：如果需要在1.3下使用，请use('linkage-kissy13')
 
 ### 初始化组件
 

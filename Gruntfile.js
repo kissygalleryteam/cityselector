@@ -41,6 +41,9 @@ module.exports = function(grunt) {
                     },{
                         src : '<%= pkg.version %>/linkage.js',
                         dest : '<%= pkg.version %>/build/linkage.js'
+                    },{
+                        src : '<%= pkg.version %>/linkage-kissy13.js',
+                        dest : '<%= pkg.version %>/build/linkage-kissy13.js'
                     }
                 ]
             }
@@ -60,6 +63,7 @@ module.exports = function(grunt) {
                     '<%= pkg.version %>/build/domestic-min.js': ['<%= pkg.version %>/build/domestic.js'],
                     '<%= pkg.version %>/build/foreign-min.js': ['<%= pkg.version %>/build/foreign.js'],                    
                     '<%= pkg.version %>/build/linkage-min.js': ['<%= pkg.version %>/build/linkage.js'],                    
+                    '<%= pkg.version %>/build/linkage-kissy13-min.js': ['<%= pkg.version %>/build/linkage-kissy13.js'],                    
                     '<%= pkg.version %>/build/linkage-data-min.js': ['<%= pkg.version %>/build/linkage-data.js']                    
                 }
             }
