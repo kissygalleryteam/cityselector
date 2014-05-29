@@ -84,7 +84,7 @@ KISSY.add(function(S,Data,Base){
             var _ = this;
             //省份
             _.provinceNode.on('change',function(e){
-                var province = _.provinceNode[0].selectedOptions[0].text;
+                var province = _._getSelectedOptionsText(_.provinceNode);
 
                 _.set('province',province,SIGN);
                 _._fillAndSelectCity(true,true);
@@ -92,14 +92,14 @@ KISSY.add(function(S,Data,Base){
             });
             //城市
             _.cityNode && _.cityNode.on('change',function(e){
-                var city = _.cityNode[0].selectedOptions[0].text;
+                var city = _._getSelectedOptionsText(_.cityNode);
 
                 _.set('city',city,SIGN); 
                 _._fillAndSelectDistrict(true,true); 
             });
             //地区
             _.districtNode && _.districtNode.on('change',function(e){
-                var district = _.districtNode[0].selectedOptions[0].text;
+                var district = _._getSelectedOptionsText(_.districtNode);
                 _.set('district',district,SIGN);
             });
         },  
@@ -149,7 +149,7 @@ KISSY.add(function(S,Data,Base){
                 node[0].options.add(new Option(DEFAULTCITY,-1));
             }
             if(isNeedSet){
-                _.set('city',node[0].selectedOptions[0].text,isTriggerBySelectChange && SIGN);
+                _.set('city',_._getSelectedOptionsText(node),isTriggerBySelectChange && SIGN);
             }
         },
         /**
@@ -181,7 +181,7 @@ KISSY.add(function(S,Data,Base){
                 node[0].options.add(new Option(DEFAULTDISTRICT,-1));
             }
             if(isNeedSet){
-                _.set('district',node[0].selectedOptions[0].text,isTriggerBySelectChange && SIGN);
+                _.set('district',_._getSelectedOptionsText(node),isTriggerBySelectChange && SIGN);
             }
         },
         /**
@@ -255,6 +255,19 @@ KISSY.add(function(S,Data,Base){
             if(e && !e.setBySelectChange){
                 this._selectDistrict();
             }
+        },
+        /**
+         * 获取指定select元素的选中项的文案
+         * @param  {node} selectEl 指定select元素
+         * @return {string} 当前选中项的文案
+         * @private
+         */
+        _getSelectedOptionsText : function(selectEl){
+            var el = selectEl[0],
+                options = el.options,
+                selectedOptions = el.selectedOptions, //目前只有webkit实现了selectedOptions
+                index = el.selectedIndex;
+            return selectedOptions ? selectedOptions[0].text : options[index].text;
         }
     },{
         ATTRS : {

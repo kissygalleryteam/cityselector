@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>1.3/build/linkage.js - The cityselector API</title>
+    <title>1.3/build/linkage-kissy13.js - The cityselector API</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,7 +90,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: 1.3/build/linkage.js</h1>
+                        <h1 class="file-heading">File: 1.3/build/linkage-kissy13.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -98,7 +98,7 @@
 combined files : 
 
 gallery/cityselector/1.3/linkage-data
-gallery/cityselector/1.3/linkage
+gallery/cityselector/1.3/linkage-kissy13
 
 */
 /**
@@ -122,7 +122,7 @@ KISSY.add(&#x27;gallery/cityselector/1.3/linkage-data&#x27;,function(){
  * @author freyaoo@gmail.com
  * @version 1.3
  */
-KISSY.add(&#x27;gallery/cityselector/1.3/linkage&#x27;,function(S,Data,Base){
+KISSY.add(&#x27;gallery/cityselector/1.3/linkage-kissy13&#x27;,function(S,Data,Base){
     &#x27;use strict&#x27;;
 
     /**
@@ -177,6 +177,7 @@ KISSY.add(&#x27;gallery/cityselector/1.3/linkage&#x27;,function(S,Data,Base){
             _.districtNode = S.one(_.get(&#x27;districtSelect&#x27;));
             _._render();
             _._bind();
+            _.initialized = true;
         },
         destructor : function(){
 
@@ -391,6 +392,9 @@ KISSY.add(&#x27;gallery/cityselector/1.3/linkage&#x27;,function(S,Data,Base){
             province : {
                 value : DEFAULTPROVINCE,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var inData = false;
                     if(val == DEFAULTPROVINCE){
                         inData = true;
@@ -407,6 +411,9 @@ KISSY.add(&#x27;gallery/cityselector/1.3/linkage&#x27;,function(S,Data,Base){
             city : {
                 value : DEFAULTCITY,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.cityNode[0].options;
@@ -421,6 +428,9 @@ KISSY.add(&#x27;gallery/cityselector/1.3/linkage&#x27;,function(S,Data,Base){
             district : {
                 value : DEFAULTDISTRICT,
                 validator : function(val){
+                    if(!this.initialized){
+                        return true;
+                    }
                     var _ = this,
                         inData = false,
                         options = _.districtNode[0].options;
