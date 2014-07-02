@@ -154,6 +154,9 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
                 province = _.get('province'),
                 city = _.get('city'),
                 node = _.cityNode;
+            if(!node){
+                return false;
+            }
             node[0].options.length = 0;
             if(province != DEFAULTPROVINCE){
                 var index = _.provinceNode[0].selectedIndex-1,
@@ -187,6 +190,9 @@ KISSY.add('gallery/cityselector/1.3/linkage',function(S,Data,Base){
                 city = _.get('city'),
                 node = _.districtNode,
                 hasDistrict = true;
+            if(!node){
+                return false;
+            }
             node[0].options.length = 0;
             if(city != DEFAULTCITY){
                 var pIndex = _.provinceNode[0].selectedIndex-1,
