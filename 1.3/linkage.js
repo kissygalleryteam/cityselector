@@ -164,24 +164,35 @@ KISSY.add(function(S,Data,Base){
                 district = _.get('district'),
                 province = _.get('province'),
                 city = _.get('city'),
-                node = _.districtNode;
+                node = _.districtNode,
+                hasDistrict = true;
             node[0].options.length = 0;
             if(city != DEFAULTCITY){
                 var pIndex = _.provinceNode[0].selectedIndex-1,
                     cIndex = _.cityNode[0].selectedIndex,
-                    districts = Data[pIndex][Data[pIndex].length-1][cIndex];
-                S.each(districts[districts.length-1],function(item,index){
-                    var op = new Option(item[1],item[0]);
-                    _.districtNode[0].add(op);
-                    if(item[1] == district){
-                        op.selected = true;
-                    }
-                });
+                    districts = Data[pIndex][Data[pIndex].length-1][cIndex],
+                    realDistricts = districts[districts.length-1];
+                if(realDistricts && realDistricts.length){
+                    S.each(realDistricts,function(item,index){
+                        var op = new Option(item[1],item[0]);
+                        _.districtNode[0].add(op);
+                        if(item[1] == district){
+                            op.selected = true;
+                        }
+                    });
+                }else{
+                    hasDistrict = false;
+                }  
             }else{
                 node[0].options.add(new Option(DEFAULTDISTRICT,-1));
             }
-            if(isNeedSet){
+            if(isNeedSet && hasDistrict){
                 _.set('district',_._getSelectedOptionsText(node),isTriggerBySelectChange && SIGN);
+            }
+            if(hasDistrict){
+                node.show();
+            }else{
+                node.hide();
             }
         },
         /**
