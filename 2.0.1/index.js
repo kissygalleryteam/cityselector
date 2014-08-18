@@ -3,7 +3,7 @@
 *
 * @module cityselector
 * @author freyaoo@gmail.com
-* @version 2.0.1
+* @version 1.3
 */
 KISSY.add(function(S,Node,Event,Richbase,Overlay,Xtpl,DomesticData){
 	'use strict';
